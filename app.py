@@ -2,6 +2,7 @@ from flask import Flask,request,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from decouple import config
+from flask_cors import CORS
 
 import joblib
 import numpy as np
@@ -12,6 +13,7 @@ sc_x = joblib.load('./model/scaler_x.pkl')
 sc_y = joblib.load('./model/scaler_y.pkl')
 
 app = Flask(__name__)
+CORS(app)
 
 #### CONFIGURACION DE SQLALCHEMY ####
 app.app_context().push()

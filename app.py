@@ -1,6 +1,7 @@
 from flask import Flask,request,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from decouple import config
 
 import joblib
 import numpy as np
@@ -14,7 +15,7 @@ app = Flask(__name__)
 
 #### CONFIGURACION DE SQLALCHEMY ####
 app.app_context().push()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'pega_aqui_la_uri_de_tu_base_de_datos'
+app.config['SQLALCHEMY_DATABASE_URI'] = config('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 ## CREAMOS LA TABLA HOUSING
@@ -142,5 +143,6 @@ def delete_data(id):
     
     return jsonify(context), 200
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run()
            
